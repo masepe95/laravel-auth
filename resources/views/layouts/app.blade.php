@@ -23,12 +23,12 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" style="background-image: url(https://img.freepik.com/premium-vector/grey-white-abstract-technology-background-hi-tech-digital-connect-communication-high-technology_262356-574.jpg?w=2000); background-repeat:repeat; background-size:contain">
 
 
         @include('includes.navbar')
 
-        <main class="container mt-3">
+        <main class="container mt-3" >
             @yield('content')
         </main>
     </div>

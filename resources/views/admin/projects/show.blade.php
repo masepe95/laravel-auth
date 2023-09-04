@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', "$project->title")
 @section('content')
+@include('includes.alert')
     <div class="card mt-5 bg-dark p-5 text-white">
         <div class="card-header rounded border-0 mb-4 d-flex justify-content-between align-content-center ">
             <h2 class="m-0 d-flex align-items-center">

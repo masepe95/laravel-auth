@@ -13,6 +13,11 @@
         class="form-control @error('title') is-invalid @enderror" id="title" aria-describedby="titleHelp"
         name="title" required>
     <div class="form-text">Required</div>
+    @error('title')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 <div class="mb-3">
     <label for="slug" class="form-label">Repository name</label>
@@ -30,6 +35,11 @@
     <label for="image" class="form-label">Image (url)</label>
     <input value="{{ old('image', $project->image) }}" type="url"
     class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+    @error('image')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 <div class="row">
     <div class="mb-3 col-6">
@@ -47,6 +57,11 @@
     <label for="n_stars" class="form-label">Number of stars recived</label>
     <input value="{{ old('n_stars', $project->n_stars) }}" type="number"
         class="form-control @error('n_stars') is-invalid @enderror" id="n_stars" name="n_stars">
+        @error('n_stars')
+        <div class="invalid-feedback">
+            {{ $message }}
+        </div>
+    @enderror
 </div>
 <div class="mb-3 form-check">
     <label class="form-check-label" for="is_public">Open source</label>

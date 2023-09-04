@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Projects List')
+@section('title', 'Trash')
 
 
 @section('content')
     <h1 class="text-center mt-5">Projects trash</h1>
+    @include('includes.alert')
     <div class="d-flex justify-content-end mt-5">
         <form class="delete-form" action="{{ route('admin.projects.dropAll') }}" method="POST">
             @csrf
@@ -64,6 +65,9 @@
             <h4 class="alert alert-danger mt-5 text-center">Trash is empty</h4>
         @endforelse
     </ul>
+    <footer class="text-center mb-5">
+        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary mx-2 mt-5">Go back to the projects list</a>
+    </footer>
 @endsection
 
 @section('scripts')

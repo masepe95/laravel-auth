@@ -5,9 +5,10 @@
 
 @section('content')
 <h1 class="text-center mt-5">My Projects</h1>
+@include('includes.alert')
 <div class="d-flex justify-content-end mt-5">
+    <a class="d-inline-block btn btn-secondary me-2" href="{{ route('admin.projects.trash') }}">Open Trash</a>
     <a class="d-inline-block btn btn-success" href="{{ route('admin.projects.create') }}">Add A Project</a>
-    <a class="d-inline-block btn btn-secondary ms-2" href="{{ route('admin.projects.trash') }}">Open Trash</a>
 </div>
     <ul class="list-unstyled">
         @forelse ($projects as $project)

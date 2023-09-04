@@ -26,8 +26,8 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between mt-3 align-items-center border-0 bg-dark">
                         <div>
-                            Creazione: {{ $project->created_at }} <br>
-                            Ultima Modifica: {{ $project->updated_at }}
+                            Created: {{ $project->created_at }} <br>
+                            Last Modified at: {{ $project->updated_at }}
                         </div>
                         <div class="buttons d-flex">
                             <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary">

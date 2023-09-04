@@ -77,4 +77,14 @@ class ProjectController extends Controller
         $project->delete();
         return to_route('admin.projects.index')->with('alert-message', 'Project deleted successfully')->with('alert-type', 'success');
     }
+
+
+    public function restore(string $id)
+    {
+        $project = Project::onlyTrashed()->findOrFail($id);
+
+        $project->restore();
+
+        return to_route('admin.posts.index')->with('alert-message', 'Project restored successfully')->with('alert-type', 'success');
+    }
 }

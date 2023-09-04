@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -59,9 +60,10 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $request->all();
+        $data['slug'] = Str::slug($data['title'], '-');
         $project->update($data);
 
-        return to_route('admin.projects.show', $project);
+        return to_route('admin.projects.show', $project)->with('alert-message', 'Project edited successfully')->with('alert-type', 'success');
     }
 
     /**
@@ -70,6 +72,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return to_route('admin.projects.index');
+        return to_route('admin.projects.index')->with('alert-message', 'Project deleted successfully')->with('alert-type', 'success');
     }
 }

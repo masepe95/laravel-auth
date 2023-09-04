@@ -6,7 +6,7 @@
     <h1 class="text-center mt-5">Edit project: {{ $project->title }}</h1>
     <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="bg-light p-5 rounded mt-5">
         @csrf
-        @method('PATCH')
+        @method('PUT')
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <input type="text" class="form-control" id="title" aria-describedby="titleHelp" name="title"
@@ -15,9 +15,9 @@
         </div>
         <div class="mb-3">
             <label for="slug" class="form-label">Repository name</label>
-            <input value="{{ $project->slug }}" type="text" class="form-control" id="slug"
+            <input disabled value="{{ $project->slug }}" type="text" class="form-control" id="slug"
                 aria-describedby="slugHelp" name="slug" required>
-            <div class="form-text">Without spaces, use '-' as a space</div>
+            <div class="form-text">Generated with Title</div>
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
@@ -54,4 +54,7 @@
     <div class="d-flex justify-content-center my-5">
         <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-secondary">Go back</a>
     </div>
+@endsection
+@section('scripts')
+    @vite('resources/js/slug-gen.js')
 @endsection

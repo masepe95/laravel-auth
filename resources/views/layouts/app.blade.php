@@ -32,6 +32,7 @@
             @yield('content')
         </main>
     </div>
+    @include('includes.toasts')
     @yield('scripts')
 </body>
 

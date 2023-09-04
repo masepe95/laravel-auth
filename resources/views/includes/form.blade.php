@@ -24,7 +24,7 @@
 <div class="mb-3">
     <label for="description" class="form-label">Description</label>
     <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description"
-        rows="10">{{ old('description'), $project->description }}</textarea>
+    rows="10">{{ old('description', $project->description) }}</textarea>
 </div>
 <div class="mb-3">
     <label for="image" class="form-label">Image (url)</label>

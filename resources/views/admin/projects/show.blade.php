@@ -14,7 +14,7 @@
             @endif
         </div>
         <div class="card-body d-flex">
-            <img src="{{ $project->image }}" alt="{{ $project->title }}">
+            <img src="{{ asset('storage/' . $project->image) }}" alt="{{ $project->title }}">
             <div class="ms-5">
                 <p>
                     {{ $project->description }}

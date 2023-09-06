@@ -36,7 +36,7 @@ class ProjectController extends Controller
         $request->validate(
             [
                 'title' => 'required|string|unique:projects',
-                //'image' => 'string|nullable|url',
+                'image' => 'image:jpg,jpeg,png|nullable',
                 'description' => 'string|nullable',
                 'main_lang' => 'string|nullable',
                 'other_langs' => 'string|nullable',
@@ -47,7 +47,7 @@ class ProjectController extends Controller
                 'title.required' => 'The title of the project is required',
                 'title.unique' => 'The title alredy exists, must be unique',
                 'n_stars.numeric' => 'You must insert a positive number',
-                //'image.url' => 'The url is not valid',
+                'image.url' => 'The file type is not valid',
             ]
         );
 
@@ -128,6 +128,11 @@ class ProjectController extends Controller
     public function drop(string $id)
     {
         $project = Project::onlyTrashed()->findOrFail($id);
+        if (!$project) return to_route('admin.projects.index')->with('alert-message', "Project not found")->with('alert-type', 'danger');
+
+        if ($project->image) Storage::delete($project->image);
+
+
         $project->forceDelete();
         return to_route('admin.projects.trash')->with('alert-message', "Project '$project->title' deleted successfully")->with('alert-type', 'success');
     }

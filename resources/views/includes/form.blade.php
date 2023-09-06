@@ -32,9 +32,10 @@
     rows="10">{{ old('description', $project->description) }}</textarea>
 </div>
 <div class="mb-3">
-    <label for="image" class="form-label">Image (url)</label>
-    <input value="{{ old('image', $project->image) }}" type="url"
+    <label for="image" class="form-label">Image</label>
+    <input value="{{ old('image', $project->image) }}" type="file"
     class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+    <div class="form-text">Valid formats: JPG, JPEG, PNG</div>
     @error('image')
         <div class="invalid-feedback">
             {{ $message }}

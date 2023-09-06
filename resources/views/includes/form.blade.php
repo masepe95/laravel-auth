@@ -1,10 +1,10 @@
 @if ($project->exists)
     {{-- EDIT --}}
-    <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="text-white bg-dark p-5 rounded mt-5">
+    <form method="POST" action="{{ route('admin.projects.update', $project) }}" class="text-white bg-dark p-5 rounded mt-5" enctype="multipart/form-data">
         @method('PUT')
     @else
         {{-- CREATE --}}
-        <form method="POST" action="{{ route('admin.projects.store') }}" class="text-white bg-dark p-5 rounded mt-5">
+        <form method="POST" action="{{ route('admin.projects.store') }}" class="text-white bg-dark p-5 rounded mt-5" enctype="multipart/form-data">
 @endif
 @csrf
 <div class="mb-3">

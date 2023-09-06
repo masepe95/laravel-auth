@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -35,7 +36,7 @@ class ProjectController extends Controller
         $request->validate(
             [
                 'title' => 'required|string|unique:projects',
-                'image' => 'string|nullable|url',
+                //'image' => 'string|nullable|url',
                 'description' => 'string|nullable',
                 'main_lang' => 'string|nullable',
                 'other_langs' => 'string|nullable',
@@ -46,14 +47,22 @@ class ProjectController extends Controller
                 'title.required' => 'The title of the project is required',
                 'title.unique' => 'The title alredy exists, must be unique',
                 'n_stars.numeric' => 'You must insert a positive number',
-                'image.url' => 'The url is not valid',
+                //'image.url' => 'The url is not valid',
             ]
         );
 
         $data = $request->all();
         $project = new Project($data);
-        $project->fill($data);
+
+        if (array_key_exists('image', $data)) {
+            $ext = $data['image']->extension();
+            $img_url = Storage::putFileAs('project_images', $data['image'], "{$data['slug']}.$ext");
+            $data['image'] = $img_url;
+        }
+
+
         $project->slug = Str::slug($project->title, '-');
+        $project->fill($data);
         $project->save();
 
         return to_route('admin.projects.show', $project)->with('alert-message', "Project '$project->title' created successfully")->with('alert-type', 'success');
@@ -82,6 +91,14 @@ class ProjectController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($data['title'], '-');
+
+        if (array_key_exists('image', $data)) {
+            if ($project->image) Storage::delete($project->image);
+            $ext = $data['image']->extension();
+            $img_url = Storage::putFileAs('project_images', $data['image'], "{$data['slug']}.$ext");
+            $data['image'] = $img_url;
+        }
+
         $project->update($data);
 
         return to_route('admin.projects.show', $project)->with('alert-message', "Project '$project->title' edited successfully")->with('alert-type', 'success');
